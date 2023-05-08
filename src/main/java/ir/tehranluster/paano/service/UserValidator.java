@@ -1,5 +1,6 @@
 package ir.tehranluster.paano.service;
 
+import ir.tehranluster.paano.dto.response.ApiErrorResponse;
 import ir.tehranluster.paano.dto.user.UserDto;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -17,10 +18,12 @@ public class UserValidator implements Validator {
 
         if(user.getPassword().length() <6){
             errors.rejectValue("password","Length", "Password must be at least 6 characters");
+            errors.rejectValue("message","Length", "حداقل تعداد کاراکتر ها باید 6 باشد .");
         }
 
         if(!user.getPassword().equals(user.getConfirmPassword())){
             errors.rejectValue("confirmPassword","Match", "Passwords must match");
+            errors.rejectValue("message","Match", "تکرار پسوورد مغایرت دارد .");
         }
 
         //confirmPassword

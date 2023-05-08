@@ -1,6 +1,7 @@
 package ir.tehranluster.paano.dao;
 
 import ir.tehranluster.paano.model.User;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

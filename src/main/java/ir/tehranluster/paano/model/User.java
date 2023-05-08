@@ -1,6 +1,7 @@
 package ir.tehranluster.paano.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import ir.tehranluster.paano.utils.Provides;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,6 +29,9 @@ public class User {
     private String email;
     @Column(name = "PASSWORD" , length = 200 , nullable = false)
     private String password;
+    @Column(name = "provider" , length = 50)
+    @Enumerated(EnumType.STRING)
+    private Provides provider;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")

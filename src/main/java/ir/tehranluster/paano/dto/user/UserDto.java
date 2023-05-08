@@ -1,6 +1,7 @@
 package ir.tehranluster.paano.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ir.tehranluster.paano.utils.Provides;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +31,8 @@ public class UserDto implements UserDetails {
     private String addr;
     private double lat;
     private double lng;
+    private Provides provider;
+    private String message;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
