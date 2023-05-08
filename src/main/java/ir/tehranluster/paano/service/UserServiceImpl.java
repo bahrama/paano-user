@@ -5,6 +5,7 @@ import ir.tehranluster.paano.dao.UserDao;
 import ir.tehranluster.paano.dao.UserDetailDao;
 import ir.tehranluster.paano.dto.user.UserDto;
 import ir.tehranluster.paano.dto.user.UserDtoManager;
+import ir.tehranluster.paano.exceptions.CustomException;
 import ir.tehranluster.paano.exceptions.EntityNotFoundException;
 import ir.tehranluster.paano.model.User;
 import lombok.RequiredArgsConstructor;
@@ -48,8 +49,13 @@ public class UserServiceImpl implements UserService{
     @Transactional(propagation = Propagation.REQUIRED , isolation = Isolation.READ_COMMITTED)
     public Long save(UserDto userDto){
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        Long userId = userDao.save(userDtoManager.transferUserDtoToEntity(userDto)).getId();
-        return userId;
+        if(userDao.findUserByEmail(userDto.getEmail()).isPresent())
+            throw new CustomException("کاربر در سیستم موجود می باشد .");
+        else {
+            Long userId = userDao.save(userDtoManager.transferUserDtoToEntity(userDto)).getId();
+            return userId;
+        }
+
     }
 
     @Override
@@ -87,7 +93,7 @@ public class UserServiceImpl implements UserService{
           return userDto;
       }
       else{
-          throw new EntityNotFoundException("user not found");
+          throw new EntityNotFoundException("کاربر یافت نشد .");
       }
     }
 

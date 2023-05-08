@@ -15,6 +15,7 @@ public interface UserDtoManager {
 
     @Mapping(source = "user.id" , target = "userId")
     @Mapping(source = "user.email" , target = "email")
+    @Mapping(source = "user.provider" , target = "provider")
     @Mapping(source = "user.password" , target = "password")
     @Mapping(source = "user.createDate" , target = "createDate")
     @Mapping(source = "user.updateDate" , target = "updateDate")
@@ -33,6 +34,7 @@ public interface UserDtoManager {
     @Mapping(source = "password" , target = "password")
     @Mapping(source = "createDate" , target = "createDate")
     @Mapping(source = "updateDate" , target = "updateDate")
+    @Mapping(source = "provider" , target = "provider")
     User transferUserDtoToEntity(UserDto userDto);
 
     @Mapping(source = "userDetailId" , target = "id")
