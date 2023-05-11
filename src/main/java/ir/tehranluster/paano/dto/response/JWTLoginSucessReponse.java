@@ -1,4 +1,4 @@
-package ir.tehranluster.paano.security;
+package ir.tehranluster.paano.dto.response;
 
 public class JWTLoginSucessReponse {
     private boolean success;

@@ -5,12 +5,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import ir.tehranluster.paano.dto.user.UserDto;
 import ir.tehranluster.paano.exceptions.EntityNotFoundException;
-import ir.tehranluster.paano.security.JWTLoginSucessReponse;
+import ir.tehranluster.paano.dto.response.JWTLoginSucessReponse;
 import ir.tehranluster.paano.security.JwtTokenProvider;
 import ir.tehranluster.paano.service.MapValidationErrorService;
 import ir.tehranluster.paano.service.UserService;
 import ir.tehranluster.paano.service.UserValidator;
 import ir.tehranluster.paano.dto.response.ApiSuccessResponse;
+import ir.tehranluster.paano.utils.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Currency;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,12 +37,10 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider tokenProvider;
 
-
-    @GetMapping("/findbyid/{id}")
-    public UserDto findById(@PathVariable Long id) throws EntityNotFoundException {
-            return userService.findUserById(id);
-        }
-
+    @PostMapping
+    public ResponseEntity<UserDto> findCurrentUser(){
+        return new ResponseEntity<UserDto>(CurrentUser.currentUser, HttpStatus.OK);
+    }
 
     @PostMapping("/register")
     @Operation(summary = "add api with condition" , operationId = "addUser" , description = "notice that this has condition")

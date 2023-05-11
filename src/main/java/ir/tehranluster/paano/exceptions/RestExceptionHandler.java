@@ -32,7 +32,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         error.setStatus(HttpStatus.BAD_REQUEST);
         error.setMessage(exc.getMessage());
         error.setTimeStamp(LocalDateTime.now());
-        error.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        error.setStatusCode(555);
         return new ResponseEntity<>(error, error.getStatus());
     }
 
