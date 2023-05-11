@@ -2,6 +2,7 @@ package ir.tehranluster.paano.security;
 
 import ir.tehranluster.paano.dto.user.UserDto;
 import ir.tehranluster.paano.service.UserService;
+import ir.tehranluster.paano.utils.CurrentUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Currency;
 
 @Component
 @RequiredArgsConstructor
@@ -46,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if(StringUtils.hasText(jwt)&& jwtTokenProvider.validateToken(jwt)){
                 String username = jwtTokenProvider.getUserIdFromJWT(jwt);
                 UserDto userDetails = userService.findUserByEmail(username);
-
+                CurrentUser.currentUser = userDetails;
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, Collections.emptyList());
 

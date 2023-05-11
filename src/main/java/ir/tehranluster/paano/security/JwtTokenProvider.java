@@ -22,7 +22,7 @@ public class JwtTokenProvider implements Serializable {
         UserDto user = (UserDto) authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());
 
-        Date expiryDate = new Date(now.getTime() + 100000);
+        Date expiryDate = new Date(now.getTime() + 2592000000L);
 
         String username = user.getUsername();
 
